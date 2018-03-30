@@ -1,4 +1,4 @@
-Configuration NvidiaTeslaDriverInstall
+Configuration VideoDriverConfig
 {
     # Folloing documentation located at:
     # https://docs.microsoft.com/en-us/azure/virtual-machines/windows/n-series-driver-setup
@@ -87,5 +87,5 @@ Configuration NvidiaTeslaDriverInstall
     }
 }
 
-NvidiaTeslaDriverInstall -out c:\dsc
+VideoDriverConfig -out c:\dsc
 Start-DscConfiguration -Wait -Force -Path c:\dsc -Verbose
