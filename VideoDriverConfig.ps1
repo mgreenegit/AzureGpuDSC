@@ -75,12 +75,14 @@ Configuration VideoDriverConfig
         Path = $DriverPath
         ProductId = ''
         Arguments = "/s"
+        ReturnCode = '522182368'
     }
 
     xPendingReboot Driver
     {
         Name = 'Driver'
         SkipCcmClientSDK = $true
+        DependsOn = '[Package]Driver'
     }
 
     xRemoteFile Agent
@@ -137,6 +139,7 @@ Configuration VideoDriverConfig
     {
         Name = 'AgentClient'
         SkipCcmClientSDK = $true
+        DependsOn = '[Package]Agent','[Package]Client'
     }
 }
 
