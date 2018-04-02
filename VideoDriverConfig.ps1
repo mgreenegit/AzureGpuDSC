@@ -1,9 +1,55 @@
+
+<#PSScriptInfo
+
+.VERSION 0.1.0
+
+.GUID fb58f019-3bf6-4708-8e72-f6fc1d0025e7
+
+.AUTHOR Michael Greene
+
+.COMPANYNAME Microsoft
+
+.COPYRIGHT 
+
+.TAGS DSCConfiguration
+
+.LICENSEURI https://github.com/mgreenegit/AzureGpuDSC/blob/dev/LICENSE
+
+.PROJECTURI https://github.com/mgreenegit/AzureGpuDSC/
+
+.ICONURI 
+
+.EXTERNALMODULEDEPENDENCIES 
+
+.REQUIREDSCRIPTS 
+
+.EXTERNALSCRIPTDEPENDENCIES 
+
+.RELEASENOTES
+https://github.com/mgreenegit/AzureGpuDSC/blob/dev/README.md#ReleaseNotes
+
+.PRIVATEDATA 2016-Datacenter
+
+#>
+
+#Requires -Module @{ModuleVersion = '8.1.0.0'; ModuleName = 'xPSDesiredStateConfiguration'}
+#Requires -Module @{ModuleVersion = '0.3.0.0'; ModuleName = 'xPendingReboot'}
+
+<# 
+
+.DESCRIPTION 
+ Demonstrates installing video drivers for N series VMs. 
+
+#> 
+
 Configuration VideoDriverConfig
 {
     # Folloing documentation located at:
     # https://docs.microsoft.com/en-us/azure/virtual-machines/windows/n-series-driver-setup
 
-    Import-DscResource -ModuleName PSDesiredStateConfiguration, xPSDesiredStateConfiguration, xPendingReboot
+    Import-DscResource -ModuleName PSDesiredStateConfiguration
+    Import-DscResource -ModuleName @{ModuleVersion = '8.1.0.0'; ModuleName = 'xPSDesiredStateConfiguration'}
+    Import-DscResource -ModuleName @{ModuleVersion = '0.3.0.0'; ModuleName = 'xPendingReboot'}
 
     $DriverPath = 'http://us.download.nvidia.com/Windows/Quadro_Certified/390.85/390.85-tesla-desktop-winserver2016-international.exe'
     $AgentPath = 'http://techsupport.teradici.com/FileManagement/Download/fd026319cd364924a696bca7f6659321?token=VFeZ8qyGMDpda0E3s12uj3CAu15PDXUIRol3@H@lhKt5ZTB8jbiLp1t9N5ZWE3L6LpoKi2cXJzt0l/UgD0P4QNw64SUaG5@6HR1h8BNtLxMf4d3fBGXPCDdwkM2Tn7Xi'
@@ -14,6 +60,13 @@ Configuration VideoDriverConfig
     $ClientDestination = 'c:\Teradici\SC-Win_3.4.0.zip'
     $ClientInstallFiles = 'c:\Teradici\SC-Win_3.4.0\'
     $ClientInstaller = 'C:\Teradici\SC-Win_3.4.0\Software Clients\Windows\PCoIP_client_release_installer_3.4.0.exe'
+
+    LocalConfigurationManager
+    {
+     ActionAfterReboot = 'ContinueConfiguration'
+     ConfigurationMode = 'ApplyandMonitor'
+     RebootNodeIfNeeded = $true
+    }
 
     Package Driver
     {
@@ -88,4 +141,5 @@ Configuration VideoDriverConfig
 }
 
 VideoDriverConfig -out c:\dsc
-Start-DscConfiguration -Wait -Force -Path c:\dsc -Verbose
+Set-DscLocalConfigurationManager -Path 'c:\dsc' -Verbose
+Start-DscConfiguration -Wait -Force -Path 'c:\dsc' -Verbose
