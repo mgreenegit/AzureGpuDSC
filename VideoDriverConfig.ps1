@@ -75,7 +75,7 @@ Configuration VideoDriverConfig
         Path = $DriverPath
         ProductId = ''
         Arguments = "/s"
-        ReturnCode = '522182368'
+        ReturnCode = '-522182368'
     }
 
     xPendingReboot Driver
