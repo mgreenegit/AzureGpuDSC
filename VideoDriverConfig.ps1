@@ -32,8 +32,8 @@ https://github.com/mgreenegit/VideoDriverConfig/blob/dev/README.md#ReleaseNotes
 
 #>
 
-#Requires -Module @{ModuleVersion = '8.1.0.0'; ModuleName = 'xPSDesiredStateConfiguration'}
-#Requires -Module @{ModuleVersion = '0.3.0.0'; ModuleName = 'xPendingReboot'}
+#Requires -Module @{ModuleName = 'xPSDesiredStateConfiguration'; ModuleVersion = '8.1.0.0'}
+#Requires -Module @{ModuleName = 'xPendingReboot'; ModuleVersion = '0.3.0.0'}
 
 <# 
 
@@ -48,8 +48,8 @@ Configuration VideoDriverConfig
     # https://docs.microsoft.com/en-us/azure/virtual-machines/windows/n-series-driver-setup
 
     Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName @{ModuleVersion = '8.1.0.0'; ModuleName = 'xPSDesiredStateConfiguration'}
-    Import-DscResource -ModuleName @{ModuleVersion = '0.3.0.0'; ModuleName = 'xPendingReboot'}
+    Import-DscResource -ModuleName @{ModuleName = 'xPSDesiredStateConfiguration'; ModuleVersion = '8.1.0.0'}
+    Import-DscResource -ModuleName @{ModuleName = 'xPendingReboot'; ModuleVersion = '0.3.0.0'}
 
     $DriverPath = 'http://us.download.nvidia.com/Windows/Quadro_Certified/390.85/390.85-tesla-desktop-winserver2016-international.exe'
     $AgentPath = 'http://techsupport.teradici.com/FileManagement/Download/fd026319cd364924a696bca7f6659321?token=VFeZ8qyGMDpda0E3s12uj3CAu15PDXUIRol3@H@lhKt5ZTB8jbiLp1t9N5ZWE3L6LpoKi2cXJzt0l/UgD0P4QNw64SUaG5@6HR1h8BNtLxMf4d3fBGXPCDdwkM2Tn7Xi'
