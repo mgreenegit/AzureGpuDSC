@@ -68,7 +68,7 @@ Configuration VideoDriverConfig
      RebootNodeIfNeeded = $true
     }
 
-    Package Driver
+    xPackage Driver
     {
         Ensure = 'Present'
         Name = 'NVIDIA Graphics Driver 390.85'
