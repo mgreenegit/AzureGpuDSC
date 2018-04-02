@@ -13,9 +13,9 @@
 
 .TAGS DSCConfiguration
 
-.LICENSEURI https://github.com/mgreenegit/AzureGpuDSC/blob/dev/LICENSE
+.LICENSEURI https://github.com/mgreenegit/VideoDriverConfig/blob/dev/LICENSE
 
-.PROJECTURI https://github.com/mgreenegit/AzureGpuDSC/
+.PROJECTURI https://github.com/mgreenegit/VideoDriverConfig/
 
 .ICONURI 
 
@@ -26,7 +26,7 @@
 .EXTERNALSCRIPTDEPENDENCIES 
 
 .RELEASENOTES
-https://github.com/mgreenegit/AzureGpuDSC/blob/dev/README.md#ReleaseNotes
+https://github.com/mgreenegit/VideoDriverConfig/blob/dev/README.md#ReleaseNotes
 
 .PRIVATEDATA 2016-Datacenter
 
