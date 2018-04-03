@@ -43,25 +43,39 @@ https://github.com/mgreenegit/VideoDriverConfig/blob/dev/README.md#ReleaseNotes
 #>
 
 <#
-Installer details:
+  Folloing documentation located at:
+  https://docs.microsoft.com/en-us/azure/virtual-machines/windows/n-series-driver-setup
+
+  Installer details:
   Nvidia error -522182368 seems to align with device not detected.
+
+  
+  The Teradici URLs will expire.  Accept the EULA here to find URLs for your deployment.
+  https://techsupport.teradici.com/ics/support/kbanswer.asp?deptID=15164&task=knowledge&questionID=3110
+  Remove the "s" from the https to avoid certificate validation issues.
 #>
 
 Configuration VideoDriverConfig
 {
-    # Folloing documentation located at:
-    # https://docs.microsoft.com/en-us/azure/virtual-machines/windows/n-series-driver-setup
+param(
+    [Parameter(Mandatory=$true)]
+    [string]$AgentURL,
+
+    [Parameter(Mandatory=$true)]
+    [string]$ClientURL
+)
 
     Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName @{ModuleName = 'xPSDesiredStateConfiguration'; ModuleVersion = '8.1.0.0'}
     Import-DscResource -ModuleName @{ModuleName = 'xPendingReboot'; ModuleVersion = '0.3.0.0'}
 
+    # Known public URL
     $DriverPath = 'http://us.download.nvidia.com/Windows/Quadro_Certified/390.85/390.85-tesla-desktop-winserver2016-international.exe'
-    $AgentPath = 'http://techsupport.teradici.com/FileManagement/Download/fd026319cd364924a696bca7f6659321?token=VFeZ8qyGMDpda0E3s12uj3CAu15PDXUIRol3@H@lhKt5ZTB8jbiLp1t9N5ZWE3L6LpoKi2cXJzt0l/UgD0P4QNw64SUaG5@6HR1h8BNtLxMf4d3fBGXPCDdwkM2Tn7Xi'
+
     $AgentDestination = 'c:\Teradici\GRA-Win_2.11.0.zip'
     $AgentInstallFiles = 'c:\Teradici\GRA-Win_2.11.0\'
     $AgentInstaller = 'C:\Teradici\GRA-Win_2.11.0\Graphics Agent\Windows\PCoIP_agent_release_installer_2.11.0.9616_graphics.exe'
-    $ClientPath = 'http://techsupport.teradici.com/FileManagement/Download/08be589befc94712b3dcf516658f9256?token=yw2O7tvl79SOP3chLW5N4WnVXSy1qgenbZYwmJvtyLFeJHcZ09hOVKg4FyIx1gDvgCs1zbTGEqeO78HnaD7OW4RNFEEWa3a709Wgcro6nDw4gSl79D/VVPUToCDzUl0x'
+
     $ClientDestination = 'c:\Teradici\SC-Win_3.4.0.zip'
     $ClientInstallFiles = 'c:\Teradici\SC-Win_3.4.0\'
     $ClientInstaller = 'C:\Teradici\SC-Win_3.4.0\Software Clients\Windows\PCoIP_client_release_installer_3.4.0.exe'
@@ -148,6 +162,10 @@ Configuration VideoDriverConfig
     }
 }
 
-VideoDriverConfig -out c:\dsc
+# Set your URLs here (these will not work, they are examples)
+$AgentURL = 'http://techsupport.teradici.com/FileManagement/Download/fd026319cd364924a696bca7f6659321?token=@KHfGFVT042KJCSzYRNN1/Ak8pxIbDuLyfV1aM@GoD9VWX71s2RSPWlgsJfq6G@TBN6ntfswFDRJCLtgdI9TxlTQymYj9tEG2yTXAZ6BdVw5vzf5N8C90FU7g538lAeA'
+$ClientURL = 'http://techsupport.teradici.com/FileManagement/Download/08be589befc94712b3dcf516658f9256?token=i3pPnMWgXpD9Az3NVoqqEY9V@An0B@mNXiSlpmjgxGV9m2Wp7u97hnIqmL@JtWQo7IoIwsMXOJcmrMV02ysxJnyv1OmmcQa8Pm0wfOws8WeKUYgjQZUK0JwypoudKBoz'
+
+VideoDriverConfig -out c:\dsc -AgentURL $AgentURL -ClientURL $ClientURL
 Set-DscLocalConfigurationManager -Path 'c:\dsc' -Verbose
 Start-DscConfiguration -Wait -Force -Path 'c:\dsc' -Verbose
