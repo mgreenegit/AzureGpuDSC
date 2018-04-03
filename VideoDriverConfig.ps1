@@ -49,7 +49,6 @@ https://github.com/mgreenegit/VideoDriverConfig/blob/dev/README.md#ReleaseNotes
   Installer details:
   Nvidia error -522182368 seems to align with device not detected.
 
-  
   The Teradici URLs will expire.  Accept the EULA here to find URLs for your deployment.
   https://techsupport.teradici.com/ics/support/kbanswer.asp?deptID=15164&task=knowledge&questionID=3110
   Remove the "s" from the https to avoid certificate validation issues.
@@ -162,7 +161,7 @@ param(
     }
 }
 
-# Set your URLs here (these will not work, they are examples)
+# Set your URLs here (these will not work, they are examples). See comments for details.
 $AgentURL = 'http://techsupport.teradici.com/FileManagement/Download/fd026319cd364924a696bca7f6659321?token=@KHfGFVT042KJCSzYRNN1/Ak8pxIbDuLyfV1aM@GoD9VWX71s2RSPWlgsJfq6G@TBN6ntfswFDRJCLtgdI9TxlTQymYj9tEG2yTXAZ6BdVw5vzf5N8C90FU7g538lAeA'
 $ClientURL = 'http://techsupport.teradici.com/FileManagement/Download/08be589befc94712b3dcf516658f9256?token=i3pPnMWgXpD9Az3NVoqqEY9V@An0B@mNXiSlpmjgxGV9m2Wp7u97hnIqmL@JtWQo7IoIwsMXOJcmrMV02ysxJnyv1OmmcQa8Pm0wfOws8WeKUYgjQZUK0JwypoudKBoz'
 
