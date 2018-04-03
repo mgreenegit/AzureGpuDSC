@@ -40,7 +40,12 @@ https://github.com/mgreenegit/VideoDriverConfig/blob/dev/README.md#ReleaseNotes
 .DESCRIPTION 
  Demonstrates installing video drivers for N series VMs. 
 
-#> 
+#>
+
+<#
+Installer details:
+  Nvidia error -522182368 seems to align with device not detected.
+#>
 
 Configuration VideoDriverConfig
 {
@@ -75,7 +80,7 @@ Configuration VideoDriverConfig
         Path = $DriverPath
         ProductId = ''
         Arguments = "/s"
-        ReturnCode = -522182368
+        ReturnCode = 0
     }
 
     xPendingReboot Driver
