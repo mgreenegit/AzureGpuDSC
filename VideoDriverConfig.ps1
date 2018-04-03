@@ -86,7 +86,7 @@ param(
      RebootNodeIfNeeded = $true
     }
 
-    xPackage Driver
+    Package Driver
     {
         Ensure = 'Present'
         Name = 'NVIDIA Graphics Driver 390.85'
